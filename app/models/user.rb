@@ -9,6 +9,7 @@ class User < ApplicationRecord
    validates :introduction,length: { maximum: 50}
 
   has_many :books, dependent: :destroy
+  has_many :book_comments, dependent: :destroy
 
   has_one_attached :profile_image
   #1:1で(単数枚画像投稿)で関連付け(アソシエーション)するという宣言
