@@ -5,6 +5,7 @@ class Book < ApplicationRecord
 
  belongs_to :user
  has_many :book_comments,dependent: :destroy
+ has_many :favorite, dependent: :destroy
 
 # 	attachment :profile_image
 #user側のprofile_imageを参照させる=bookには必要ない

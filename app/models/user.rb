@@ -10,6 +10,7 @@ class User < ApplicationRecord
 
   has_many :books, dependent: :destroy
   has_many :book_comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   has_one_attached :profile_image
   #1:1で(単数枚画像投稿)で関連付け(アソシエーション)するという宣言
@@ -26,7 +27,7 @@ class User < ApplicationRecord
   def get_profile_image
     (profile_image.attached?) ? profile_image : 'no_image.jpg'
   end
-  
+
 
 
 
