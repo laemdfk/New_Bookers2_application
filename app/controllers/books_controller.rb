@@ -38,7 +38,8 @@ skip_before_action :verify_authenticity_token
     @book = Book.find(params[:id])
     # @books = Book.all
     @user = @book.user
-# 　  @users = User.find(params[:id])
+    # @users = User.find(params[:id])
+    @book_comment = BookComment.new
     end
 
 
