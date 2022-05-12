@@ -29,6 +29,39 @@ class User < ApplicationRecord
   end
 
 
+# 被フォロー(フォローされる側)の定義
+has_many :revers_of_relationships, class_name: "Relationships",foreign_key: "followed_id",dependent: :destroy
+
+#自分をフォローしているユーザーを、被フォローを通じて取得する
+has_many :followrs,through: :reverese_of_reltionships,source: :follower
+
+#与フォロー(フォローする側)の定義
+has_many :relationships, class_name: "Relationships",foreign_key: "followed_id",dependent: :destroy
+
+#自分がフォローしているユーザーを、与フォロー関係を通じて取得する
+has_many :followings,through: :relationships,source: :followed
+
+
+
+#メソッドの追記
+
+#ユーザーのフォロー
+ def follow(user)
+   relationships.create(followed_id: user.id)
+ end
+
+#ユーザーのフォローを外す
+ def unfollw(user)
+   relationships.find_by(followed_id: user.id)
+ end
+ 
+ #フォローしていればtrueを返す
+ def following?(user)
+   following_user.include?(user)
+ end
+
+end
+
 
 
 # def get_image
@@ -47,4 +80,4 @@ class User < ApplicationRecord
   #1:Nで(複数枚画像投稿)で関連付け(アソシエーション)するという宣言
 
   # attachment :image
-end
+#end
