@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'relationships/create'
-  get 'relationships/destroy'
   root to: 'homes#top'
   get 'home/about'=>"homes#about",as: 'about'
 
@@ -11,6 +9,9 @@ Rails.application.routes.draw do
   resources :books do
     resources :book_comments, only:[:create, :destroy]
     resource :favorites,only:[:create, :destroy]
+
+    get 'followings' => 'relationships#following',as: 'followings'
+    get 'followers' => 'relationships#followers',as: 'followers'
   end
 
   resources :users
