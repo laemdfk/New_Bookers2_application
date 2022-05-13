@@ -54,11 +54,11 @@ has_many :followings,through: :relationships,source: :followed
  def unfollw(user)
    relationships.find_by(followed_id: user.id)
  end
- 
+
  #フォローしていればtrueを返す
- def following?(user)
-   following_user.include?(user)
- end
+def following?(user)
+    followings.include?(user)
+  end
 
 end
 
